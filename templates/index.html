@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block nav %}
+	{%- if admin -%}
+	<a class="navbar-brand" href="/exit">
+		<span> & </span>
+		<span>{{admin}}</span>
+	</a>
+	{% endif %}
+{% endblock %}
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Посилання</th>
+                <th>Час створення</th>
+                <th>Час переходу за посиланням</th>
+                <th><a class="nav-link" href="\add" class="nav-item">Створити посилання</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in table %}
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+					<td>
+						{%- if admin -%}
+						<form action="/activate" method="POST" >
+							<input name="link" type="text" value="{{i[0]}}" class="form-control" hidden="true" >
+							<p><input type="submit" value="Відправлено"></p>
+						</form>
+						<form action="/remove" method="POST" >
+							<input name="link" type="text" value="{{i[0]}}" class="form-control" hidden="true" >
+							<p><input type="submit" value="Видалити"></p>
+						</form>
+						{% endif %}
+					</td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+{% endblock %}
