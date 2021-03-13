@@ -22,9 +22,9 @@ def trf():
                 cursor.execute("SELECT * FROM admin")
                 row = cursor.fetchall()
                 requests.get(row[0][2])
-                print("SELECT * FROM admin")
         except:
-            print("NO   SELECT * FROM admin")
+            time.sleep(1)
+            continue
         time.sleep(random.randint(800, 1000))
 
 
